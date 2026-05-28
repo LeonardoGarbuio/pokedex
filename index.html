@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex Biológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="bedrock_parser.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body class="min-h-screen flex items-center justify-center md:p-4 bg-gray-900 overflow-hidden md:overflow-auto">
+
+    <div class="bg-red-600 w-full h-screen md:h-auto md:max-w-5xl md:rounded-3xl shadow-[inset_-5px_-5px_15px_rgba(0,0,0,0.2)] md:shadow-[inset_-10px_-10px_20px_rgba(0,0,0,0.3),_10px_10px_30px_rgba(0,0,0,0.5)] md:border-4 md:border-red-800 overflow-hidden flex flex-col md:flex-row relative">
+        
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-8 bg-red-700 shadow-[inset_2px_0_5px_rgba(0,0,0,0.4),inset_-2px_0_5px_rgba(0,0,0,0.4)] z-10 transform -translate-x-1/2 flex flex-col justify-evenly">
+            <div class="h-1 bg-red-900 w-full"></div>
+            <div class="h-1 bg-red-900 w-full"></div>
+            <div class="h-1 bg-red-900 w-full"></div>
+        </div>
+
+        <div class="w-full md:w-1/2 p-4 md:p-6 flex flex-col relative z-0 shrink-0">
+            <div class="flex items-start gap-4 mb-4 md:mb-6 border-b-4 border-red-800 pb-2 md:pb-4">
+                <div class="w-16 h-16 rounded-full glass-lens animate-blink"></div>
+                <div class="flex gap-2 mt-1">
+                    <div class="w-4 h-4 rounded-full bg-red-500 mini-lens border border-red-900"></div>
+                    <div class="w-4 h-4 rounded-full bg-yellow-400 mini-lens border border-yellow-700"></div>
+                    <div class="w-4 h-4 rounded-full bg-green-500 mini-lens border border-green-800"></div>
+                </div>
+            </div>
+
+            <div class="bg-gray-200 rounded-t-xl rounded-bl-xl rounded-br-[40px] p-3 md:p-4 shadow-inner border-2 border-gray-400 mb-4 md:mb-6">
+                <div class="flex justify-center gap-4 mb-2">
+                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                </div>
+                
+                <div id="main-screen" class="pokedex-screen rounded-md h-[30vh] md:h-80 w-full flex flex-col items-center justify-end p-4 border-4 border-gray-600 relative transition-all duration-300">
+                    <div id="three-canvas" class="absolute inset-0 z-10 hidden"></div>
+                    <img id="poke-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="Venusaur" class="absolute inset-0 w-full h-full object-contain p-4 pb-16 z-10 drop-shadow-lg transition-opacity duration-300">
+                    <div class="text-center z-20 w-full relative pointer-events-none">
+                        <h2 id="poke-name" class="font-retro text-xs md:text-sm text-black mb-1 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(155,188,15,0.9)]">VENUSAUR</h2>
+                        <p id="poke-sci-name" class="text-xl md:text-2xl text-black font-bold italic drop-shadow-[0_2px_4px_rgba(155,188,15,0.9)]">Bufo floris</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mt-4">
+                    <div class="w-6 h-6 rounded-full bg-red-600 border border-red-800 shadow-sm"></div>
+                    <div class="flex gap-2">
+                        <div class="w-8 h-2 bg-gray-600 rounded-full"></div>
+                        <div class="w-8 h-2 bg-gray-600 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center px-4">
+                <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center shadow-lg border border-gray-900">
+                     <div class="w-8 h-8 bg-black rounded-sm relative shadow-inner">
+                         <div class="absolute w-full h-1/3 bg-gray-700 top-1/3 left-0"></div>
+                         <div class="absolute w-1/3 h-full bg-gray-700 left-1/3 top-0"></div>
+                     </div>
+                </div>
+                <div class="flex gap-2">
+                    <div class="w-10 h-3 bg-blue-500 rounded-full shadow-sm border border-blue-800"></div>
+                    <div class="w-10 h-3 bg-green-500 rounded-full shadow-sm border border-green-800"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 p-4 md:p-6 flex flex-col flex-grow bg-red-600 border-t-8 md:border-t-0 md:border-l-8 border-red-800 shadow-[inset_0_10px_10px_rgba(0,0,0,0.2)] md:shadow-inner z-0 relative">
+            <div class="bg-gray-900 rounded-lg p-3 md:p-4 shadow-inner border-2 border-gray-700 text-green-400 flex-grow h-0 md:h-auto md:min-h-[22rem] overflow-y-auto mb-4 md:mb-6 custom-scrollbar text-sm md:text-lg lg:text-xl">
+                <div id="data-panel" class="space-y-4">
+                    <p class="animate-pulse">Selecione um espécime para análise...</p>
+                </div>
+            </div>
+
+            <div class="bg-red-500 rounded-xl p-2 md:p-3 shadow-inner border-2 border-red-800 shrink-0">
+                <p class="text-white font-retro text-[8px] md:text-[10px] mb-2 text-center">SELECIONE O ESPÉCIME</p>
+                <div id="pokemon-list" class="grid grid-cols-4 md:grid-cols-4 gap-2 max-h-24 md:max-h-32 overflow-y-auto custom-scrollbar p-1">
+                </div>
+            </div>
+            
+            <div class="flex justify-end pt-3 md:pt-4 gap-4 items-center shrink-0 mt-auto md:mt-0">
+                <div class="flex gap-2">
+                    <button id="btn-prev-page" class="w-12 h-8 bg-gray-800 border-2 border-gray-600 hover:bg-gray-700 active:scale-95 transition-all text-white rounded shadow-inner flex items-center justify-center font-retro text-[10px] cursor-pointer">◀</button>
+                    <button id="btn-next-page" class="w-12 h-8 bg-gray-800 border-2 border-gray-600 hover:bg-gray-700 active:scale-95 transition-all text-white rounded shadow-inner flex items-center justify-center font-retro text-[10px] cursor-pointer">▶</button>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-yellow-400 shadow-lg border-2 border-yellow-600 cursor-pointer hover:bg-yellow-300 flex items-center justify-center text-xs font-retro">OK</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
