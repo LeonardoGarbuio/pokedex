@@ -41,8 +41,8 @@ function parseMolang(expr) {
     if (typeof expr === 'number') return () => expr;
     if (typeof expr !== 'string') return () => 0;
     
-    let jsExpr = expr.replace(/math\./g, 'm.');
-    jsExpr = jsExpr.replace(/q\./g, 'q.').replace(/query\./g, 'q.');
+    let jsExpr = expr.replace(/math\./gi, 'm.');
+    jsExpr = jsExpr.replace(/q\./gi, 'q.').replace(/query\./gi, 'q.');
     
     try {
         const fn = new Function('m', 'q', `return ${jsExpr};`);
@@ -101,7 +101,7 @@ function parseTrack(trackData) {
     return () => [0,0,0];
 }
 
-function setFaceUV(geometry, faceIndex, uX, uY, uW, uH, texW, texH) {
+function setFaceUV(geometry, faceIndex, uX, uY, uW, uH, texW, texH, mirror = false) {
     const uvs = geometry.attributes.uv.array;
     const v0 = faceIndex * 8;
     
@@ -110,13 +110,19 @@ function setFaceUV(geometry, faceIndex, uX, uY, uW, uH, texW, texH) {
     let y1 = 1.0 - (uY + uH) / texH;
     let y2 = 1.0 - uY / texH;
 
+    if (mirror) {
+        let temp = x1;
+        x1 = x2;
+        x2 = temp;
+    }
+
     uvs[v0 + 0] = x1; uvs[v0 + 1] = y2;
     uvs[v0 + 2] = x2; uvs[v0 + 3] = y2;
     uvs[v0 + 4] = x1; uvs[v0 + 5] = y1;
     uvs[v0 + 6] = x2; uvs[v0 + 7] = y1;
 }
 
-function loadBedrockModel(pokeKey, containerElement, fallbackCallback) {
+function loadBedrockModel(pokeKey, containerElement, fallbackCallback, isShiny = false) {
     clearThreeJSMemory();
     
     if (currentBedrockScene) {
@@ -151,7 +157,7 @@ function loadBedrockModel(pokeKey, containerElement, fallbackCallback) {
 
     const jsonUrl = `models/${pokeKey}.geo.json`;
     const animUrl = `models/${pokeKey}.animation.json`;
-    const textureUrl = `models/${pokeKey}.png`;
+    const textureUrl = isShiny ? `models/${pokeKey}_shiny.png` : `models/${pokeKey}.png`;
 
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(textureUrl, (texture) => {
@@ -173,8 +179,8 @@ function loadBedrockModel(pokeKey, containerElement, fallbackCallback) {
 
             const material = new THREE.MeshLambertMaterial({ 
                 map: texture, 
-                alphaTest: 0.1,
-                transparent: true,
+                alphaTest: 0.5,
+                transparent: false,
                 side: THREE.DoubleSide
             });
             activeMaterials.push(material);
@@ -250,9 +256,13 @@ function loadBedrockModel(pokeKey, containerElement, fallbackCallback) {
 
                 if (bone.cubes) {
                     bone.cubes.forEach(cube => {
-                        const w = cube.size[0];
-                        const h = cube.size[1];
-                        const d = cube.size[2];
+                        const w_orig = cube.size[0];
+                        const h_orig = cube.size[1];
+                        const d_orig = cube.size[2];
+                        
+                        const w = Math.max(0.001, w_orig);
+                        const h = Math.max(0.001, h_orig);
+                        const d = Math.max(0.001, d_orig);
                         
                         const inflate = cube.inflate || 0;
                         const geom = new THREE.BoxGeometry(w + inflate*2, h + inflate*2, d + inflate*2);
@@ -261,12 +271,19 @@ function loadBedrockModel(pokeKey, containerElement, fallbackCallback) {
                         if (cube.uv) {
                             const u = cube.uv[0];
                             const v = cube.uv[1];
-                            setFaceUV(geom, 0, u + d + w, v + d, d, h, texW, texH); 
-                            setFaceUV(geom, 1, u, v + d, d, h, texW, texH);         
-                            setFaceUV(geom, 2, u + d, v, w, d, texW, texH);         
-                            setFaceUV(geom, 3, u + d + w, v, w, d, texW, texH);     
-                            setFaceUV(geom, 4, u + d, v + d, w, h, texW, texH);     
-                            setFaceUV(geom, 5, u + d + w + d, v + d, w, h, texW, texH); 
+                            const m = cube.mirror === true;
+                            
+                            if (m) {
+                                setFaceUV(geom, 0, u, v + d_orig, d_orig, h_orig, texW, texH, true);
+                                setFaceUV(geom, 1, u + d_orig + w_orig, v + d_orig, d_orig, h_orig, texW, texH, true);
+                            } else {
+                                setFaceUV(geom, 0, u + d_orig + w_orig, v + d_orig, d_orig, h_orig, texW, texH, false); 
+                                setFaceUV(geom, 1, u, v + d_orig, d_orig, h_orig, texW, texH, false);         
+                            }
+                            setFaceUV(geom, 2, u + d_orig, v, w_orig, d_orig, texW, texH, m);         
+                            setFaceUV(geom, 3, u + d_orig + w_orig, v, w_orig, d_orig, texW, texH, m);     
+                            setFaceUV(geom, 5, u + d_orig, v + d_orig, w_orig, h_orig, texW, texH, m);     
+                            setFaceUV(geom, 4, u + d_orig + w_orig + d_orig, v + d_orig, w_orig, h_orig, texW, texH, m); 
                         }
 
                         const mesh = new THREE.Mesh(geom, material);
@@ -275,9 +292,9 @@ function loadBedrockModel(pokeKey, containerElement, fallbackCallback) {
                         const oy = cube.origin[1];
                         const oz = cube.origin[2];
                         
-                        const cx = ox + w / 2;
-                        const cy = oy + h / 2;
-                        const cz = oz + d / 2;
+                        const cx = ox + w_orig / 2;
+                        const cy = oy + h_orig / 2;
+                        const cz = oz + d_orig / 2;
                         
                         mesh.position.set(-(cx - px), cy - py, cz - pz);
 

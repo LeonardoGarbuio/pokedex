@@ -7,7 +7,8 @@ const pokemonData = {
         ancestralComum: "Bulbasaur",
         metamorfose: "Bulbasaur -> Ivysaur -> Venusaur",
         arvoreFilogenetica: `[Ancestral Anfíbio Basal]\n ├── Linha Puramente Aquática\n │    └── Poliwag ➔ Poliwhirl\n │\n └── Linha Terrestre Simbiótica\n      └── Bulbasaur ➔ Ivysaur ➔ Venusaur`,
-        biologia: "Exemplo perfeito de Simbiose (Mutualismo). A planta em suas costas realiza fotossíntese e fornece energia ao animal."
+        biologia: "Exemplo perfeito de Simbiose (Mutualismo). A planta em suas costas realiza fotossíntese e fornece energia ao animal.",
+        shinyFilter: "hue-rotate(35deg) saturate(1.5) brightness(1.1)"
     },
     charizard: {
         id: 6,
@@ -17,7 +18,8 @@ const pokemonData = {
         ancestralComum: "Charmander",
         metamorfose: "Charmander -> Charmeleon -> Charizard",
         arvoreFilogenetica: `[Ancestral Reptiliano de Fogo]\n ├── Linha Quadrúpede Terrestre\n │    └── Salandit ➔ Salazzle\n │\n └── Linha Bípede Alada\n      └── Charmander ➔ Charmeleon ➔ Charizard`,
-        biologia: "Um caso clássico de Evolução Convergente. Apesar da anatomia idêntica aos grandes dragões, pertence à linhagem dos lagartos de fogo."
+        biologia: "Um caso clássico de Evolução Convergente. Apesar da anatomia idêntica aos grandes dragões, pertence à linhagem dos lagartos de fogo.",
+        shinyFilter: "grayscale(1) brightness(0.35) contrast(1.5)"
     },
     gengar: {
         id: 94,
@@ -27,7 +29,8 @@ const pokemonData = {
         ancestralComum: "Gastly",
         metamorfose: "Gastly -> Haunter -> Gengar",
         arvoreFilogenetica: `[Ancestral Espectral Gasoso]\n ├── Linha Fogo Combustível\n │    └── Litwick ➔ Lampent\n │\n └── Linha Tóxica Venenosa\n      └── Gastly ➔ Haunter ➔ Gengar`,
-        biologia: "Atua como um fungo ou organismo gasoso. Sobrevive atuando como um parasita sorrateiro de energia térmica."
+        biologia: "Atua como um fungo ou organismo gasoso. Sobrevive atuando como um parasita sorrateiro de energia térmica.",
+        shinyFilter: "brightness(0.7) contrast(1.2)"
     },
     vaporeon: {
         id: 134,
@@ -37,7 +40,8 @@ const pokemonData = {
         ancestralComum: "Eevee (Irradiação Adaptativa)",
         metamorfose: "Eevee -> Vaporeon",
         arvoreFilogenetica: `[Ancestral Mamífero (Eevee)]\n ├── Adaptação Térmica\n │    ├── Flareon (Calor)\n │    └── Glaceon (Frio)\n │\n └── Adaptação Aquática\n      └── Vaporeon`,
-        biologia: "Exemplo de Irradiação Adaptativa. Mutação genética do Eevee para ocupar nichos aquáticos."
+        biologia: "Exemplo de Irradiação Adaptativa. Mutação genética do Eevee para ocupar nichos aquáticos.",
+        shinyFilter: "hue-rotate(50deg) saturate(1.2)"
     },
     dragonite: {
         id: 149,
@@ -47,7 +51,8 @@ const pokemonData = {
         ancestralComum: "Dratini",
         metamorfose: "Dratini -> Dragonair -> Dragonite",
         arvoreFilogenetica: `[Ancestral Draconídeo Marinho]\n ├── Linha Serpentina das Profundezas\n │    └── Gyarados (Convergência)\n │\n └── Linha Alada de Superfície\n      └── Dratini ➔ Dragonair ➔ Dragonite`,
-        biologia: "Superpredador aerodinâmico dos oceanos, com envergadura pequena porém potente."
+        biologia: "Superpredador aerodinâmico dos oceanos, com envergadura pequena porém potente.",
+        shinyFilter: "hue-rotate(110deg) saturate(0.8) brightness(0.9)"
     },
     tyranitar: {
         id: 248,
@@ -57,7 +62,8 @@ const pokemonData = {
         ancestralComum: "Larvitar",
         metamorfose: "Larvitar -> Pupitar -> Tyranitar",
         arvoreFilogenetica: `[Ancestral Terrestre Cascudão]\n ├── Linha Couraçada Quadrúpede\n │    └── Aron ➔ Lairon ➔ Aggron\n │\n └── Linha Terópode Bípede\n      └── Larvitar ➔ Pupitar ➔ Tyranitar`,
-        biologia: "Ciclo de vida semelhante aos insetos. Apex predador que fortifica sua carapaça mineral."
+        biologia: "Ciclo de vida semelhante aos insetos. Apex predador que fortifica sua carapaça mineral.",
+        shinyFilter: "hue-rotate(-55deg) saturate(0.55) brightness(1.3)"
     },
     lucario: {
         id: 448,
@@ -67,7 +73,8 @@ const pokemonData = {
         ancestralComum: "Riolu",
         metamorfose: "Riolu -> Lucario",
         arvoreFilogenetica: `[Ancestral Canídeo Lupino]\n ├── Linha Feral (Quadrúpede)\n │    └── Poochyena ➔ Mightyena\n │\n └── Linha Bípede Sensitiva\n      └── Riolu ➔ Lucario`,
-        biologia: "Capaz de ler e manipular ondas eletromagnéticas (Aura) para prever movimentos."
+        biologia: "Capaz de ler e manipular ondas eletromagnéticas (Aura) para prever movimentos.",
+        shinyFilter: "hue-rotate(185deg) saturate(2)"
     },
     garchomp: {
         id: 445,
@@ -77,7 +84,8 @@ const pokemonData = {
         ancestralComum: "Gible",
         metamorfose: "Gible -> Gabite -> Garchomp",
         arvoreFilogenetica: `[Ancestral Cartilaginoso]\n ├── Linha Aquática\n │    └── Sharpedo\n │\n └── Linha Terrestre\n      └── Gible ➔ Gabite ➔ Garchomp`,
-        biologia: "Evolução convergente com tubarões, adaptado para escavar em solo árido."
+        biologia: "Evolução convergente com tubarões, adaptado para escavar em solo árido.",
+        shinyFilter: "saturate(0.5) brightness(0.8)"
     },
     haxorus: {
         id: 612,
@@ -87,7 +95,8 @@ const pokemonData = {
         ancestralComum: "Axew",
         metamorfose: "Axew -> Fraxure -> Haxorus",
         arvoreFilogenetica: `[Ancestral Réptil Mandibular]\n ├── Linha Crânio Rígido\n │    └── Cranidos ➔ Rampardos\n │\n └── Linha Presas de Machado\n      └── Axew ➔ Fraxure ➔ Haxorus`,
-        biologia: "Presas hipertrofiadas na forma de machados de queratina rígida."
+        biologia: "Presas hipertrofiadas na forma de machados de queratina rígida.",
+        shinyFilter: "grayscale(1) brightness(0.3) contrast(1.5)"
     },
     hydreigon: {
         id: 635,
@@ -97,7 +106,8 @@ const pokemonData = {
         ancestralComum: "Deino",
         metamorfose: "Deino -> Zweilous -> Hydreigon",
         arvoreFilogenetica: `[Ancestral Draconídeo das Trevas]\n ├── Linha Alada Simples\n │    └── Noibat ➔ Noivern\n │\n └── Linha Policéfala\n      └── Deino ➔ Zweilous ➔ Hydreigon`,
-        biologia: "Caso de policefalia onde apenas a cabeça central possui funções cerebrais plenamente desenvolvidas."
+        biologia: "Caso de policefalia onde apenas a cabeça central possui funções cerebrais plenamente desenvolvidas.",
+        shinyFilter: "hue-rotate(-120deg) saturate(1.2)"
     },
     greninja: {
         id: 658,
@@ -107,7 +117,8 @@ const pokemonData = {
         ancestralComum: "Froakie",
         metamorfose: "Froakie -> Frogadier -> Greninja",
         arvoreFilogenetica: `[Ancestral Anfíbio Ágil]\n ├── Linha Venenosa\n │    └── Croagunk ➔ Toxicroak\n │\n └── Linha Hidrocinética\n      └── Froakie ➔ Frogadier ➔ Greninja`,
-        biologia: "Manipula a umidade do ar para criar projéteis d'água pressurizada."
+        biologia: "Manipula a umidade do ar para criar projéteis d'água pressurizada.",
+        shinyFilter: "grayscale(1) brightness(0.25) contrast(1.5)"
     },
     talonflame: {
         id: 663,
@@ -117,7 +128,8 @@ const pokemonData = {
         ancestralComum: "Fletchling",
         metamorfose: "Fletchling -> Fletchinder -> Talonflame",
         arvoreFilogenetica: `[Ancestral Ave de Rapina]\n ├── Linha Voadora Padrão\n │    └── Pidgey ➔ Pidgeotto\n │\n └── Linha Termofílica\n      └── Fletchling ➔ Fletchinder ➔ Talonflame`,
-        biologia: "Ave termofílica que inflama sacos de gás internos para ataques aéreos de alta temperatura."
+        biologia: "Ave termofílica que inflama sacos de gás internos para ataques aéreos de alta temperatura.",
+        shinyFilter: "hue-rotate(-20deg) saturate(1.5)"
     }
 };
 
@@ -133,9 +145,11 @@ const imageBaseUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/s
 // Pagination State
 let currentPageIndex = 0;
 let currentPokeKey = 'charizard';
+let isShiny = false;
 
 const btnPrevPage = document.getElementById('btn-prev-page');
 const btnNextPage = document.getElementById('btn-next-page');
+const btnShiny = document.getElementById('btn-shiny');
 
 // Fallback function when 3D model loading fails
 function triggerFallback(pokeKey) {
@@ -242,14 +256,15 @@ function renderPokemonData(pokeKey) {
         threeCanvas.classList.remove('hidden');
         threeCanvas.style.opacity = '1';
         
-        // Use custom Bedrock parser
+        // Setup the 2D image source in case fallback is triggered
+        const basePath = isShiny ? "shiny/" : "";
+        pokeImage.src = `${imageBaseUrl}${basePath}${data.id}.png`;
+        pokeImage.alt = data.nomePopular;
+        
+        // Use custom Bedrock parser, passing isShiny to load the correct texture
         loadBedrockModel(pokeKey, threeCanvas, () => {
             triggerFallback(pokeKey);
-        });
-        
-        // Setup the 2D image source in case fallback is triggered
-        pokeImage.src = `${imageBaseUrl}${data.id}.png`;
-        pokeImage.alt = data.nomePopular;
+        }, isShiny);
         
         pokeName.innerText = data.nomePopular;
         pokeSciName.innerText = data.nomeCientifico;
@@ -262,12 +277,14 @@ function renderPokemonData(pokeKey) {
     }, 300);
 }
 
-function initMenu() {
+function renderMenu() {
+    pokemonListContainer.innerHTML = '';
     Object.keys(pokemonData).forEach(key => {
         const poke = pokemonData[key];
         const btn = document.createElement('button');
         btn.className = "bg-blue-200 hover:bg-blue-400 border-b-4 border-r-4 border-blue-600 rounded p-1 flex items-center justify-center transition-all active:border-b-0 active:border-r-0 active:mt-1 shadow-inner";
-        const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${poke.id}.png`;
+        const basePath = isShiny ? "shiny/" : "";
+        const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${basePath}${poke.id}.png`;
         btn.innerHTML = `<img src="${spriteUrl}" alt="${poke.nomePopular}" class="w-10 h-10 pixelated">`;
         btn.onclick = () => {
             document.body.style.cursor = 'wait';
@@ -276,7 +293,10 @@ function initMenu() {
         };
         pokemonListContainer.appendChild(btn);
     });
-    
+}
+
+function initMenu() {
+    renderMenu();
     // Initialize with first loaded pokemon
     renderPokemonData('charizard');
 }
@@ -287,4 +307,20 @@ window.onload = () => {
     // Bind physical hardware buttons below the screen
     btnPrevPage.onclick = () => prevPage();
     btnNextPage.onclick = () => nextPage();
+
+    if (btnShiny) {
+        btnShiny.onclick = () => {
+            isShiny = !isShiny;
+            if (isShiny) {
+                btnShiny.classList.add('bg-yellow-200', 'border-yellow-400');
+                btnShiny.classList.remove('bg-yellow-400', 'border-yellow-600');
+            } else {
+                btnShiny.classList.remove('bg-yellow-200', 'border-yellow-400');
+                btnShiny.classList.add('bg-yellow-400', 'border-yellow-600');
+            }
+            
+            renderMenu();
+            renderPokemonData(currentPokeKey);
+        };
+    }
 };
