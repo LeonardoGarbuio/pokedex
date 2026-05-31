@@ -336,7 +336,7 @@ function loadBedrockModel(pokeKey, containerElement, fallbackCallback, isShiny =
             rootGroup.scale.set(scale, scale, scale);
             
             rootGroup.position.x = -center.x * scale;
-            rootGroup.position.y = -center.y * scale;
+            rootGroup.position.y = (-center.y * scale) - 3; // Move model down visually
             rootGroup.position.z = -center.z * scale;
             
             // Attach animation loop
